@@ -36,9 +36,9 @@ final class InMemoryMutexTest extends TestCase
     /**
      * @test
      *
-     * @return void
      * @throws \Throwable
      *
+     * @return void
      */
     public function acquire(): void
     {
