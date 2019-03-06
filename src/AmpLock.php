@@ -12,13 +12,21 @@ declare(strict_types = 1);
 
 namespace ServiceBus\Mutex;
 
-use function Amp\asyncCall;
+use function Amp\call;
+use Amp\Promise;
 
 /**
- *
+ * @internal
  */
 final class AmpLock implements Lock
 {
+    /**
+     * Lock identifier.
+     *
+     * @var string
+     */
+    private $id;
+
     /**
      * The function to be called on release or null if the lock has been released.
      *
@@ -27,10 +35,12 @@ final class AmpLock implements Lock
     private $releaser;
 
     /**
+     * @param string        $id
      * @param callable|null $releaser
      */
-    public function __construct(?callable $releaser)
+    public function __construct(string $id, ?callable $releaser)
     {
+        $this->id       = $id;
         $this->releaser = $releaser;
     }
 
@@ -45,17 +55,29 @@ final class AmpLock implements Lock
     /**
      * {@inheritdoc}
      */
-    public function release(): void
+    public function id(): string
     {
-        if (null === $this->releaser)
-        {
-            return;
-        }
+        return $this->id;
+    }
 
-        $releaser       = $this->releaser;
-        $this->releaser = null;
+    /**
+     * {@inheritdoc}
+     */
+    public function release(): Promise
+    {
+        /** @psalm-suppress MixedTypeCoercion */
+        return call(
+            function(): \Generator
+            {
+                if (null !== $this->releaser)
+                {
+                    $releaser       = $this->releaser;
+                    $this->releaser = null;
 
-        asyncCall($releaser);
+                    yield call($releaser);
+                }
+            }
+        );
     }
 
     public function __destruct()

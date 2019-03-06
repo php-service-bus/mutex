@@ -20,8 +20,8 @@ final class InMemoryMutexFactory implements MutexFactory
     /**
      * {@inheritdoc}
      */
-    public function create(string $key): Mutex
+    public function create(string $id): Mutex
     {
-        return new InMemoryMutex($key);
+        return new InMemoryMutex($id);
     }
 }

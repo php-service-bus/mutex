@@ -20,9 +20,9 @@ interface MutexFactory
     /**
      * Create lock for specified operation.
      *
-     * @param string $key
+     * @param string $id
      *
      * @return Mutex
      */
-    public function create(string $key): Mutex;
+    public function create(string $id): Mutex;
 }

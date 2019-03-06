@@ -12,11 +12,20 @@ declare(strict_types = 1);
 
 namespace ServiceBus\Mutex;
 
+use Amp\Promise;
+
 /**
  *
  */
 interface Lock
 {
+    /**
+     * Receive lock identifier.
+     *
+     * @return string
+     */
+    public function id(): string;
+
     /**
      * Checks if the lock has already been released.
      *
@@ -27,7 +36,7 @@ interface Lock
     /**
      * Releases the lock. No-op if the lock has already been released.
      *
-     * @return void
+     * @return Promise
      */
-    public function release(): void;
+    public function release(): Promise;
 }

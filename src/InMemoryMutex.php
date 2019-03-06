@@ -19,6 +19,10 @@ use ServiceBus\Mutex\Storage\InMemoryMutexStorage;
 
 /**
  * Can only be used when working in one process.
+ *
+ * @internal
+ *
+ * @see InMemoryMutexFactory
  */
 final class InMemoryMutex implements Mutex
 {
@@ -27,19 +31,19 @@ final class InMemoryMutex implements Mutex
     /**
      * @var string
      */
-    private $key;
+    private $id;
 
     /**
-     * @param string $key
+     * @param string $id
      */
-    public function __construct(string $key)
+    public function __construct(string $id)
     {
-        $this->key = $key;
+        $this->id = $id;
     }
 
     public function __destruct()
     {
-        InMemoryMutexStorage::instance()->unlock($this->key);
+        InMemoryMutexStorage::instance()->unlock($this->id);
     }
 
     /**
@@ -52,17 +56,18 @@ final class InMemoryMutex implements Mutex
         return call(
             function(): \Generator
             {
-                while (InMemoryMutexStorage::instance()->has($this->key))
+                while (InMemoryMutexStorage::instance()->has($this->id))
                 {
                     yield new Delayed(self::LATENCY_TIMEOUT);
                 }
 
-                InMemoryMutexStorage::instance()->lock($this->key);
+                InMemoryMutexStorage::instance()->lock($this->id);
 
                 return new AmpLock(
+                    $this->id,
                     function(): void
                     {
-                        InMemoryMutexStorage::instance()->unlock($this->key);
+                        InMemoryMutexStorage::instance()->unlock($this->id);
                     }
                 );
             }

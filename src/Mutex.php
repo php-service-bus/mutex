@@ -25,7 +25,6 @@ interface Mutex
      * @throws \ServiceBus\Mutex\Exceptions\SyncException An error occurs when attempting to obtain the lock
      *
      * @return \Amp\Promise<\ServiceBus\Mutex\Lock>
-     *
      */
     public function acquire(): Promise;
 }

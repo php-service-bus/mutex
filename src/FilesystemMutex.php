@@ -15,7 +15,7 @@ namespace ServiceBus\Mutex;
 use function Amp\asyncCall;
 use function Amp\call;
 use function Amp\File\get;
-use function Amp\File\touch;
+use function Amp\File\put;
 use function Amp\File\unlink;
 use Amp\Delayed;
 use Amp\Promise;
@@ -23,12 +23,25 @@ use ServiceBus\Mutex\Exceptions\SyncException;
 
 /**
  * It can be used when several processes are running within the same host.
+ *
+ * @internal
+ *
+ * @see FilesystemMutexFactory
  */
-final class FileMutex implements Mutex
+final class FilesystemMutex implements Mutex
 {
     const LATENCY_TIMEOUT = 50;
 
     /**
+     * Mutex identifier.
+     *
+     * @var string
+     */
+    private $id;
+
+    /**
+     * Barrier file path.
+     *
      * @var string
      */
     private $filePath;
@@ -41,10 +54,12 @@ final class FileMutex implements Mutex
     private $release;
 
     /**
+     * @param string $id
      * @param string $filePath
      */
-    public function __construct(string $filePath)
+    public function __construct(string $id, string $filePath)
     {
+        $this->id       = $id;
         $this->filePath = $filePath;
         $this->release  = function(): \Generator
         {
@@ -52,10 +67,12 @@ final class FileMutex implements Mutex
             {
                 yield unlink($this->filePath);
             }
+            // @codeCoverageIgnoreStart
             catch (\Throwable $throwable)
             {
                 /** Not interests */
             }
+            // @codeCoverageIgnoreEnd
         };
     }
 
@@ -81,9 +98,9 @@ final class FileMutex implements Mutex
                         yield new Delayed(self::LATENCY_TIMEOUT);
                     }
 
-                    yield touch($this->filePath);
+                    yield put($this->filePath, '');
 
-                    return new AmpLock($this->release);
+                    return new AmpLock($this->id, $this->release);
                 }
                 catch (\Throwable $throwable)
                 {

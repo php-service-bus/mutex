@@ -33,8 +33,8 @@ final class FilesystemMutexFactory implements MutexFactory
     /**
      * {@inheritdoc}
      */
-    public function create(string $key): Mutex
+    public function create(string $id): Mutex
     {
-        return new FileMutex(\sprintf('%s/%s', $this->storageDirectory, \sha1($key)));
+        return new FilesystemMutex($id, \sprintf('%s/%s', $this->storageDirectory, \sha1($id)));
     }
 }
