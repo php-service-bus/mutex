@@ -30,7 +30,7 @@ use ServiceBus\Mutex\Exceptions\SyncException;
  */
 final class FilesystemMutex implements Mutex
 {
-    const LATENCY_TIMEOUT = 50;
+    private const LATENCY_TIMEOUT = 50;
 
     /**
      * Mutex identifier.

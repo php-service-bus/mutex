@@ -26,7 +26,7 @@ use ServiceBus\Mutex\Storage\InMemoryMutexStorage;
  */
 final class InMemoryMutex implements Mutex
 {
-    const LATENCY_TIMEOUT = 10;
+    private const LATENCY_TIMEOUT = 10;
 
     /**
      * @var string
