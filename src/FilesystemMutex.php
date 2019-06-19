@@ -24,7 +24,7 @@ use ServiceBus\Mutex\Exceptions\SyncException;
 /**
  * It can be used when several processes are running within the same host.
  *
- * @internal
+ * @internal Created by factory (FilesystemMutexFactory::create())
  *
  * @see FilesystemMutexFactory
  */

@@ -20,7 +20,7 @@ use ServiceBus\Mutex\Storage\InMemoryMutexStorage;
 /**
  * Can only be used when working in one process.
  *
- * @internal
+ * @internal Created by factory (InMemoryMutexFactory::create())
  *
  * @see InMemoryMutexFactory
  */
