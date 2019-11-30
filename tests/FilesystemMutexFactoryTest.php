@@ -25,8 +25,6 @@ final class FilesystemMutexFactoryTest extends TestCase
      * @test
      *
      * @throws \Throwable
-     *
-     * @return void
      */
     public function create(): void
     {

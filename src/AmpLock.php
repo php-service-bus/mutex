@@ -25,20 +25,16 @@ final class AmpLock implements Lock
      *
      * @var string
      */
-    private $id;
+    private string $id;
 
     /**
      * The function to be called on release or null if the lock has been released.
      *
-     * @var callable|null
+     * @var \Closure|null
      */
-    private $releaser;
+    private ?\Closure $releaser;
 
-    /**
-     * @param string        $id
-     * @param callable|null $releaser
-     */
-    public function __construct(string $id, ?callable $releaser)
+    public function __construct(string $id, ?\Closure $releaser)
     {
         $this->id       = $id;
         $this->releaser = $releaser;
@@ -65,11 +61,10 @@ final class AmpLock implements Lock
      */
     public function release(): Promise
     {
-        /** @psalm-suppress MixedTypeCoercion */
         return call(
             function(): \Generator
             {
-                if (null !== $this->releaser)
+                if (true === isset($this->releaser))
                 {
                     $releaser       = $this->releaser;
                     $this->releaser = null;
@@ -82,7 +77,7 @@ final class AmpLock implements Lock
 
     public function __destruct()
     {
-        if (null !== $this->releaser)
+        if (true === isset($this->releaser))
         {
             $this->release();
         }

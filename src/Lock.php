@@ -21,8 +21,6 @@ interface Lock
 {
     /**
      * Receive lock identifier.
-     *
-     * @return string
      */
     public function id(): string;
 

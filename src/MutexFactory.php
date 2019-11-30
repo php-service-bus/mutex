@@ -19,10 +19,6 @@ interface MutexFactory
 {
     /**
      * Create lock for specified operation.
-     *
-     * @param string $id
-     *
-     * @return Mutex
      */
     public function create(string $id): Mutex;
 }

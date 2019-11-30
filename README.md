@@ -1,7 +1,7 @@
 ## What is it?
-[![Build Status](https://travis-ci.org/php-service-bus/mutex.svg?branch=v3.3)](https://travis-ci.org/php-service-bus/mutex)
-[![Code Coverage](https://scrutinizer-ci.com/g/php-service-bus/mutex/badges/coverage.png?b=v3.3)](https://scrutinizer-ci.com/g/php-service-bus/mutex/?branch=v3.3)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/php-service-bus/mutex/badges/quality-score.png?b=v3.3)](https://scrutinizer-ci.com/g/php-service-bus/mutex/?branch=v3.3)
+[![Build Status](https://travis-ci.org/php-service-bus/mutex.svg?branch=v4.0)](https://travis-ci.org/php-service-bus/mutex)
+[![Code Coverage](https://scrutinizer-ci.com/g/php-service-bus/mutex/badges/coverage.png?b=v4.0)](https://scrutinizer-ci.com/g/php-service-bus/mutex/?branch=v4.0)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/php-service-bus/mutex/badges/quality-score.png?b=v4.0)](https://scrutinizer-ci.com/g/php-service-bus/mutex/?branch=v4.0)
 
 This component is part of the [PHP Service Bus](https://github.com/php-service-bus/service-bus): mutexes implementation.
 > The code is partly based on the [amp/sync](https://github.com/amphp/sync) project.

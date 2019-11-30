@@ -34,29 +34,19 @@ final class FilesystemMutex implements Mutex
 
     /**
      * Mutex identifier.
-     *
-     * @var string
      */
-    private $id;
+    private string $id;
 
     /**
      * Barrier file path.
-     *
-     * @var string
      */
-    private $filePath;
+    private string $filePath;
 
     /**
      * Release handler.
-     *
-     * @var \Closure
      */
-    private $release;
+    private \Closure $release;
 
-    /**
-     * @param string $id
-     * @param string $filePath
-     */
     public function __construct(string $id, string $filePath)
     {
         $this->id       = $id;
@@ -110,11 +100,6 @@ final class FilesystemMutex implements Mutex
         );
     }
 
-    /**
-     * @param string $path
-     *
-     * @return \Generator
-     */
     private static function hasLockFile(string $path): \Generator
     {
         try

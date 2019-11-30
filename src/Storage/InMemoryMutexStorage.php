@@ -18,21 +18,20 @@ namespace ServiceBus\Mutex\Storage;
 final class InMemoryMutexStorage
 {
     /**
-     * @var array<string, bool>
+     * @psalm-var array<string, bool>
      */
-    private $localStorage = [];
+    private array
 
-    /**
-     * @var self|null
-     */
-    private static $instance;
+ $localStorage = [];
+
+    private static ?self $instance;
 
     /**
      * @return self
      */
     public static function instance(): self
     {
-        if (null === self::$instance)
+        if (false === isset(self::$instance))
         {
             self::$instance = new self();
         }
@@ -40,31 +39,16 @@ final class InMemoryMutexStorage
         return self::$instance;
     }
 
-    /**
-     * @param string $key
-     *
-     * @return void
-     */
     public function lock(string $key): void
     {
         $this->localStorage[$key] = true;
     }
 
-    /**
-     * @param string $key
-     *
-     * @return bool
-     */
     public function has(string $key): bool
     {
         return isset($this->localStorage[$key]);
     }
 
-    /**
-     * @param string $key
-     *
-     * @return void
-     */
     public function unlock(string $key): void
     {
         unset($this->localStorage[$key]);
@@ -72,8 +56,6 @@ final class InMemoryMutexStorage
 
     /**
      * Reset instance.
-     *
-     * @return void
      */
     public function reset(): void
     {

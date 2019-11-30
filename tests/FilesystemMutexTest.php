@@ -38,8 +38,6 @@ final class FilesystemMutexTest extends TestCase
      * @test
      *
      * @throws \Throwable
-     *
-     * @return void
      */
     public function acquire(): void
     {
@@ -74,8 +72,6 @@ final class FilesystemMutexTest extends TestCase
      * @test
      *
      * @throws \Throwable
-     *
-     * @return void
      */
     public function writeToIncorrectDirectory(): void
     {

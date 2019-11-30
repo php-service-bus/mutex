@@ -31,11 +31,8 @@ final class InMemoryMutex implements Mutex
     /**
      * @var string
      */
-    private $id;
+    private string $id;
 
-    /**
-     * @param string $id
-     */
     public function __construct(string $id)
     {
         $this->id = $id;
