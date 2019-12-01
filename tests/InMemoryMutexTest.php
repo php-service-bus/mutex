@@ -41,7 +41,7 @@ final class InMemoryMutexTest extends TestCase
     public function acquire(): void
     {
         Loop::run(
-            function(): \Generator
+            function (): \Generator
             {
                 $mutex   = new InMemoryMutex(__CLASS__);
                 $promise = $mutex->acquire();

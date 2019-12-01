@@ -20,9 +20,7 @@ final class InMemoryMutexStorage
     /**
      * @psalm-var array<string, bool>
      */
-    private array
-
- $localStorage = [];
+    private array $localStorage = [];
 
     private static ?self $instance;
 

@@ -51,7 +51,7 @@ final class FilesystemMutex implements Mutex
     {
         $this->id       = $id;
         $this->filePath = $filePath;
-        $this->release  = function(): \Generator
+        $this->release  = function (): \Generator
         {
             try
             {
@@ -79,7 +79,7 @@ final class FilesystemMutex implements Mutex
     public function acquire(): Promise
     {
         return call(
-            function(): \Generator
+            function (): \Generator
             {
                 try
                 {

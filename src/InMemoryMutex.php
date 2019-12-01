@@ -51,7 +51,7 @@ final class InMemoryMutex implements Mutex
     public function acquire(): Promise
     {
         return call(
-            function(): \Generator
+            function (): \Generator
             {
                 while (InMemoryMutexStorage::instance()->has($this->id))
                 {
@@ -62,7 +62,7 @@ final class InMemoryMutex implements Mutex
 
                 return new AmpLock(
                     $this->id,
-                    function(): void
+                    function (): void
                     {
                         InMemoryMutexStorage::instance()->unlock($this->id);
                     }

@@ -42,7 +42,7 @@ final class FilesystemMutexTest extends TestCase
     public function acquire(): void
     {
         Loop::run(
-            function(): \Generator
+            function (): \Generator
             {
                 $mutexFile = \sys_get_temp_dir() . '/mutex.test';
 

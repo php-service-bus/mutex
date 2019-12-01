@@ -62,7 +62,7 @@ final class AmpLock implements Lock
     public function release(): Promise
     {
         return call(
-            function(): \Generator
+            function (): \Generator
             {
                 if (true === isset($this->releaser))
                 {
