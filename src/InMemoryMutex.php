@@ -44,8 +44,6 @@ final class InMemoryMutex implements Mutex
     }
 
     /**
-     * @psalm-suppress MixedTypeCoercion
-     *
      * {@inheritdoc}
      */
     public function acquire(): Promise

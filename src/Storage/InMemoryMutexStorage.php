@@ -22,14 +22,14 @@ final class InMemoryMutexStorage
      */
     private array $localStorage = [];
 
-    private static ?self $instance;
+    private static ?self $instance = null;
 
     /**
      * @return self
      */
     public static function instance(): self
     {
-        if (false === isset(self::$instance))
+        if (self::$instance === null)
         {
             self::$instance = new self();
         }

@@ -33,8 +33,6 @@ interface Lock
 
     /**
      * Releases the lock. No-op if the lock has already been released.
-     *
-     * @return Promise
      */
     public function release(): Promise;
 }

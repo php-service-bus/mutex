@@ -32,7 +32,7 @@ final class AmpLock implements Lock
      *
      * @var \Closure|null
      */
-    private ?\Closure $releaser;
+    private ?\Closure $releaser = null;
 
     public function __construct(string $id, ?\Closure $releaser)
     {
@@ -45,7 +45,7 @@ final class AmpLock implements Lock
      */
     public function released(): bool
     {
-        return null === $this->releaser;
+        return $this->releaser === null;
     }
 
     /**
@@ -64,7 +64,7 @@ final class AmpLock implements Lock
         return call(
             function (): \Generator
             {
-                if (true === isset($this->releaser))
+                if ($this->releaser !== null)
                 {
                     $releaser       = $this->releaser;
                     $this->releaser = null;
@@ -77,7 +77,7 @@ final class AmpLock implements Lock
 
     public function __destruct()
     {
-        if (true === isset($this->releaser))
+        if ($this->releaser !== null)
         {
             $this->release();
         }
