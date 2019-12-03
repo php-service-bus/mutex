@@ -34,18 +34,24 @@ final class FilesystemMutex implements Mutex
 
     /**
      * Mutex identifier.
+     *
+     * @var string
      */
-    private string $id;
+    private $id;
 
     /**
      * Barrier file path.
+     *
+     * @var string
      */
-    private string $filePath;
+    private $filePath;
 
     /**
      * Release handler.
+     *
+     * @var \Closure
      */
-    private \Closure $release;
+    private $release;
 
     public function __construct(string $id, string $filePath)
     {

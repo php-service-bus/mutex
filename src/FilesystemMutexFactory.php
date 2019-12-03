@@ -17,7 +17,8 @@ namespace ServiceBus\Mutex;
  */
 final class FilesystemMutexFactory implements MutexFactory
 {
-    private string $storageDirectory;
+    /** @var string */
+    private $storageDirectory;
 
     public function __construct(string $storageDirectory)
     {

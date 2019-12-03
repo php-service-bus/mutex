@@ -27,7 +27,7 @@
     }
   },
   "require": {
-    "php": ">=7.4",
+    "php": ">=7.3",
     "amphp/amp": "v2.4.*",
     "amphp/file": "v1.0.*"
   },

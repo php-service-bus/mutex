@@ -25,14 +25,14 @@ final class AmpLock implements Lock
      *
      * @var string
      */
-    private string $id;
+    private $id;
 
     /**
      * The function to be called on release or null if the lock has been released.
      *
      * @var \Closure|null
      */
-    private ?\Closure $releaser = null;
+    private $releaser = null;
 
     public function __construct(string $id, ?\Closure $releaser)
     {

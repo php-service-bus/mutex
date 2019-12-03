@@ -28,10 +28,8 @@ final class InMemoryMutex implements Mutex
 {
     private const LATENCY_TIMEOUT = 10;
 
-    /**
-     * @var string
-     */
-    private string $id;
+    /**  @var string */
+    private $id;
 
     public function __construct(string $id)
     {
