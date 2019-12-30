@@ -57,7 +57,7 @@ final class InMemoryCollectionStorage
 
     public function get(string $key): ?Lock
     {
-        return $this->localStorage[$key] ?: null;
+        return $this->localStorage[$key] ?? null;
     }
 
     /**
