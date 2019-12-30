@@ -32,7 +32,7 @@ final class InMemoryCollectionStorage
      */
     public static function instance(): self
     {
-        if(self::$instance === null)
+        if (self::$instance === null)
         {
             self::$instance = new self();
         }
