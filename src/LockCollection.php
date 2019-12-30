@@ -23,5 +23,8 @@ interface LockCollection
 
     public function place(string $key, Lock $lock): Promise;
 
-    public function remove(string $key): Promise;
+    /**
+     * Returns \ServiceBus\Mutex\Lock|null
+     */
+    public function extract(string $key): Promise;
 }

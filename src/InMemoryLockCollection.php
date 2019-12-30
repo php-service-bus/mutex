@@ -47,10 +47,12 @@ final class InMemoryLockCollection implements LockCollection
     /**
      * @inheritDoc
      */
-    public function remove(string $key): Promise
+    public function extract(string $key): Promise
     {
+        $lock = InMemoryCollectionStorage::instance()->get($key);
+
         InMemoryCollectionStorage::instance()->remove($key);
 
-        return new Success();
+        return new Success($lock);
     }
 }

@@ -55,6 +55,11 @@ final class InMemoryCollectionStorage
         $this->localStorage[$key] = $lock;
     }
 
+    public function get(string $key): ?Lock
+    {
+        return $this->localStorage[$key] ?: null;
+    }
+
     /**
      * Reset instance.
      */
