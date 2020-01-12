@@ -4,6 +4,9 @@ php:
   - 7.3
   - 7.4snapshot
 
+services:
+  - redis-server
+
 cache:
   directories:
     - $HOME/.cache/composer

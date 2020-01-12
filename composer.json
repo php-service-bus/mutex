@@ -29,7 +29,8 @@
   "require": {
     "php": ">=7.3",
     "amphp/amp": "v2.4.*",
-    "amphp/file": "v1.0.*"
+    "amphp/file": "v1.0.*",
+    "amphp/redis": "v1.0.*"
   },
   "require-dev": {
     "php-service-bus/code-style-config": "v1.2.*",

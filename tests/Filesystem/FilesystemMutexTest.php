@@ -10,13 +10,13 @@
 
 declare(strict_types = 1);
 
-namespace ServiceBus\Mutex\Tests;
+namespace ServiceBus\Mutex\Tests\Filesystem;
 
+use ServiceBus\Mutex\Filesystem\FilesystemMutex;
 use function Amp\Promise\wait;
 use Amp\Loop;
 use PHPUnit\Framework\TestCase;
 use ServiceBus\Mutex\Exceptions\SyncException;
-use ServiceBus\Mutex\FilesystemMutex;
 use ServiceBus\Mutex\Lock;
 
 /**
@@ -24,9 +24,7 @@ use ServiceBus\Mutex\Lock;
  */
 final class FilesystemMutexTest extends TestCase
 {
-    /**
-     * {@inheritdoc}
-     */
+    /** @test */
     protected function tearDown(): void
     {
         parent::tearDown();
@@ -34,15 +32,11 @@ final class FilesystemMutexTest extends TestCase
         @\unlink(\sys_get_temp_dir() . '/mutex.test');
     }
 
-    /**
-     * @test
-     *
-     * @throws \Throwable
-     */
+    /** @test */
     public function acquire(): void
     {
         Loop::run(
-            function (): \Generator
+            static function (): \Generator
             {
                 $mutexFile = \sys_get_temp_dir() . '/mutex.test';
 
@@ -68,11 +62,7 @@ final class FilesystemMutexTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     *
-     * @throws \Throwable
-     */
+    /** @test */
     public function writeToIncorrectDirectory(): void
     {
         $this->expectException(SyncException::class);

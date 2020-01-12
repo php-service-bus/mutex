@@ -10,7 +10,10 @@
 
 declare(strict_types = 1);
 
-namespace ServiceBus\Mutex;
+namespace ServiceBus\Mutex\Filesystem;
+
+use ServiceBus\Mutex\Mutex;
+use ServiceBus\Mutex\MutexFactory;
 
 /**
  * Create a mutex using the file system as storage.

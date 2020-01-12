@@ -10,7 +10,7 @@
 
 declare(strict_types = 1);
 
-namespace ServiceBus\Mutex\Storage;
+namespace ServiceBus\Mutex\InMemory;
 
 /**
  * @internal

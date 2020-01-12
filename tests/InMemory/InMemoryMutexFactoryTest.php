@@ -10,22 +10,18 @@
 
 declare(strict_types = 1);
 
-namespace ServiceBus\Mutex\Tests;
+namespace ServiceBus\Mutex\Tests\InMemory;
 
 use PHPUnit\Framework\TestCase;
-use ServiceBus\Mutex\InMemoryMutex;
-use ServiceBus\Mutex\InMemoryMutexFactory;
+use ServiceBus\Mutex\InMemory\InMemoryMutex;
+use ServiceBus\Mutex\InMemory\InMemoryMutexFactory;
 
 /**
  *
  */
 final class InMemoryMutexFactoryTest extends TestCase
 {
-    /**
-     * @test
-     *
-     * @throws \Throwable
-     */
+    /** @test */
     public function create(): void
     {
         $mutex = (new InMemoryMutexFactory())->create(__CLASS__);

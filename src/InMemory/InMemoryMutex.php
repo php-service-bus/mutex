@@ -10,12 +10,13 @@
 
 declare(strict_types = 1);
 
-namespace ServiceBus\Mutex;
+namespace ServiceBus\Mutex\InMemory;
 
+use ServiceBus\Mutex\AmpLock;
+use ServiceBus\Mutex\Mutex;
 use function Amp\call;
-use Amp\Delayed;
 use Amp\Promise;
-use ServiceBus\Mutex\Storage\InMemoryMutexStorage;
+use function Amp\delay;
 
 /**
  * Can only be used when working in one process.
@@ -51,7 +52,7 @@ final class InMemoryMutex implements Mutex
             {
                 while (InMemoryMutexStorage::instance()->has($this->id))
                 {
-                    yield new Delayed(self::LATENCY_TIMEOUT);
+                    yield delay(self::LATENCY_TIMEOUT);
                 }
 
                 InMemoryMutexStorage::instance()->lock($this->id);

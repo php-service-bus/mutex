@@ -13,6 +13,7 @@
          stopOnFailure="false">
     <php>
         <ini name="error_reporting" value="-1"/>
+        <env name="REDIS_CONNECTION_DSN" value="tcp://localhost:6379"/>
     </php>
 
     <testsuites>

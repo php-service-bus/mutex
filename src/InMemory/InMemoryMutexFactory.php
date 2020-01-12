@@ -10,7 +10,10 @@
 
 declare(strict_types = 1);
 
-namespace ServiceBus\Mutex;
+namespace ServiceBus\Mutex\InMemory;
+
+use ServiceBus\Mutex\Mutex;
+use ServiceBus\Mutex\MutexFactory;
 
 /**
  * Create simple in memory mutex.

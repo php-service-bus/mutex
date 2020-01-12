@@ -10,13 +10,13 @@
 
 declare(strict_types = 1);
 
-namespace ServiceBus\Mutex\Tests;
+namespace ServiceBus\Mutex\Tests\InMemory;
 
 use Amp\Loop;
 use PHPUnit\Framework\TestCase;
-use ServiceBus\Mutex\InMemoryMutex;
+use ServiceBus\Mutex\InMemory\InMemoryMutex;
+use ServiceBus\Mutex\InMemory\InMemoryMutexStorage;
 use ServiceBus\Mutex\Lock;
-use ServiceBus\Mutex\Storage\InMemoryMutexStorage;
 
 /**
  *
@@ -33,15 +33,11 @@ final class InMemoryMutexTest extends TestCase
         InMemoryMutexStorage::instance()->reset();
     }
 
-    /**
-     * @test
-     *
-     * @throws \Throwable
-     */
+    /** @test */
     public function acquire(): void
     {
         Loop::run(
-            function (): \Generator
+            static function (): \Generator
             {
                 $mutex   = new InMemoryMutex(__CLASS__);
                 $promise = $mutex->acquire();

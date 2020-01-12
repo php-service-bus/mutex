@@ -10,8 +10,10 @@
 
 declare(strict_types = 1);
 
-namespace ServiceBus\Mutex;
+namespace ServiceBus\Mutex\Filesystem;
 
+use ServiceBus\Mutex\AmpLock;
+use ServiceBus\Mutex\Mutex;
 use function Amp\asyncCall;
 use function Amp\call;
 use function Amp\File\get;

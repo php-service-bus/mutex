@@ -10,22 +10,18 @@
 
 declare(strict_types = 1);
 
-namespace ServiceBus\Mutex\Tests;
+namespace ServiceBus\Mutex\Tests\Filesystem;
 
 use PHPUnit\Framework\TestCase;
-use ServiceBus\Mutex\FilesystemMutex;
-use ServiceBus\Mutex\FilesystemMutexFactory;
+use ServiceBus\Mutex\Filesystem\FilesystemMutex;
+use ServiceBus\Mutex\Filesystem\FilesystemMutexFactory;
 
 /**
  *
  */
 final class FilesystemMutexFactoryTest extends TestCase
 {
-    /**
-     * @test
-     *
-     * @throws \Throwable
-     */
+    /** @test */
     public function create(): void
     {
         $mutex = (new FilesystemMutexFactory(\sys_get_temp_dir()))->create(__CLASS__);
