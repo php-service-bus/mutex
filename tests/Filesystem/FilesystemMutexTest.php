@@ -24,7 +24,9 @@ use ServiceBus\Mutex\Lock;
  */
 final class FilesystemMutexTest extends TestCase
 {
-    /** @test */
+    /**
+     * @inheritDoc
+     */
     protected function tearDown(): void
     {
         parent::tearDown();
