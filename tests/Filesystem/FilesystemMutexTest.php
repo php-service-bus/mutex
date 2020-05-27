@@ -57,7 +57,7 @@ final class FilesystemMutexTest extends TestCase
 
                 unset($lock, $mutex);
 
-                static::assertFileNotExists($mutexFile);
+                static::assertFileDoesNotExist($mutexFile);
 
                 Loop::stop();
             }

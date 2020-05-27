@@ -16,10 +16,10 @@ use ServiceBus\Mutex\AmpLock;
 use ServiceBus\Mutex\Mutex;
 use function Amp\asyncCall;
 use function Amp\call;
+use function Amp\delay;
 use function Amp\File\get;
 use function Amp\File\put;
 use function Amp\File\unlink;
-use Amp\Delayed;
 use Amp\Promise;
 use ServiceBus\Mutex\Exceptions\SyncException;
 
@@ -94,7 +94,7 @@ final class FilesystemMutex implements Mutex
 
                     while ($exists)
                     {
-                        yield new Delayed(self::LATENCY_TIMEOUT);
+                        yield delay(self::LATENCY_TIMEOUT);
                     }
 
                     yield put($this->filePath, '');
