@@ -89,7 +89,10 @@ final class FilesystemMutex implements Mutex
             {
                 try
                 {
-                    while (yield from self::hasLockFile($this->filePath))
+                    /** @var bool $exists */
+                    $exists = yield from self::hasLockFile($this->filePath);
+
+                    while ($exists)
                     {
                         yield new Delayed(self::LATENCY_TIMEOUT);
                     }

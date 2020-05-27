@@ -22,7 +22,7 @@ interface Mutex
     /**
      * Acquires a lock on the mutex.
      *
-     * Returns \ServiceBus\Mutex\Lock
+     * @return Promise<\ServiceBus\Mutex\Lock>
      *
      * @throws \ServiceBus\Mutex\Exceptions\SyncException An error occurs when attempting to obtain the lock
      */

@@ -32,7 +32,7 @@ final class AmpLock implements Lock
      *
      * @var \Closure|null
      */
-    private $releaser = null;
+    private $releaser;
 
     public function __construct(string $id, ?\Closure $releaser)
     {
