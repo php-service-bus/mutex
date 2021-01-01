@@ -49,20 +49,17 @@ final class RedisMutex implements Mutex
             {
                 try
                 {
-                    /** @psalm-suppress TooManyTemplateParams */
                     while (yield $this->client->has($this->id))
                     {
                         yield delay(self::LATENCY_TIMEOUT);
                     }
 
-                    /** @psalm-suppress TooManyTemplateParams */
                     yield $this->client->set($this->id, 'lock');
 
                     return new AmpLock(
                         $this->id,
                         function (): \Generator
                         {
-                            /** @psalm-suppress TooManyTemplateParams */
                             yield $this->client->delete($this->id);
                         }
                     );
