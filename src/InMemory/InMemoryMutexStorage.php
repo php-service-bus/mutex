@@ -23,7 +23,7 @@ final class InMemoryMutexStorage
     private $localStorage = [];
 
     /** @var self|null  */
-    private static $instance = null;
+    private static $instance;
 
     /**
      * @return self
