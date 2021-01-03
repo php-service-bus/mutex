@@ -1,14 +1,16 @@
 ## What is it?
+
+[![Packagist](https://img.shields.io/packagist/v/php-service-bus/mutex.svg)](https://packagist.org/packages/php-service-bus/mutex)
+[![Packagist](https://img.shields.io/packagist/dt/php-service-bus/mutex.svg)](https://packagist.org/packages/php-service-bus/mutex)
 ![Continuous Integration](https://github.com/php-service-bus/mutex/workflows/Continuous%20Integration/badge.svg)
+[![codecov](https://codecov.io/gh/php-service-bus/mutex/branch/v4.2/graph/badge.svg?token=0bKwdiuo0S)](https://codecov.io/gh/php-service-bus/mutex)
 [![Shepherd](https://shepherd.dev/github/php-service-bus/mutex/coverage.svg)](https://shepherd.dev/github/php-service-bus/mutex)
-[![Code Coverage](https://scrutinizer-ci.com/g/php-service-bus/mutex/badges/coverage.png?b=v4.2)](https://scrutinizer-ci.com/g/php-service-bus/mutex/?branch=v4.2)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/php-service-bus/mutex/badges/quality-score.png?b=v4.2)](https://scrutinizer-ci.com/g/php-service-bus/mutex/?branch=v4.2)
 
 This component is part of the [PHP Service Bus](https://github.com/php-service-bus/service-bus): mutexes implementation.
 > The code is partly based on the [amp/sync](https://github.com/amphp/sync) project.
 
 ## Contributing
-Contributions are welcome! Please read [CONTRIBUTING](CONTRIBUTING.md) for details.
+Contributions are welcome! Please read [CONTRIBUTING](.github/CONTRIBUTING.md) for details.
 
 ## Communication Channels
 You can find help and discussion in the following places:
