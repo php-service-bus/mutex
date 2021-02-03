@@ -3,12 +3,12 @@
 /**
  * PHP Mutex implementation.
  *
- * @author  Maksim Masiukevich <dev@async-php.com>
+ * @author  Maksim Masiukevich <contacts@desperado.dev>
  * @license MIT
  * @license https://opensource.org/licenses/MIT
  */
 
-declare(strict_types = 1);
+declare(strict_types = 0);
 
 namespace ServiceBus\Mutex\InMemory;
 
@@ -20,9 +20,6 @@ use ServiceBus\Mutex\MutexFactory;
  */
 final class InMemoryMutexFactory implements MutexFactory
 {
-    /**
-     * {@inheritdoc}
-     */
     public function create(string $id): Mutex
     {
         return new InMemoryMutex($id);

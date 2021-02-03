@@ -6,11 +6,10 @@
          xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd">
     <coverage>
         <include>
-            <directory>./</directory>
+            <directory>./src</directory>
         </include>
         <exclude>
             <directory>./tests</directory>
-            <directory>./vendor</directory>
         </exclude>
     </coverage>
     <php>
@@ -18,7 +17,7 @@
         <env name="REDIS_CONNECTION_DSN" value="tcp://localhost:6379"/>
     </php>
     <testsuites>
-        <testsuite name="PHP Service Bus mutex component">
+        <testsuite name="Mutex component">
             <directory>./tests/</directory>
         </testsuite>
     </testsuites>

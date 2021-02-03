@@ -3,12 +3,12 @@
 /**
  * PHP Mutex implementation.
  *
- * @author  Maksim Masiukevich <dev@async-php.com>
+ * @author  Maksim Masiukevich <contacts@desperado.dev>
  * @license MIT
  * @license https://opensource.org/licenses/MIT
  */
 
-declare(strict_types = 1);
+declare(strict_types = 0);
 
 namespace ServiceBus\Mutex\Redis;
 
@@ -27,10 +27,14 @@ final class RedisMutex implements Mutex
 {
     private const LATENCY_TIMEOUT = 10;
 
-    /** @var Redis */
+    /**
+     * @var Redis
+     */
     private $client;
 
-    /**  @var string */
+    /**
+     * @var string
+     */
     private $id;
 
     public function __construct(Redis $client, string $id)
@@ -39,9 +43,6 @@ final class RedisMutex implements Mutex
         $this->id     = $id;
     }
 
-    /**
-     * @inheritDoc
-     */
     public function acquire(): Promise
     {
         return call(

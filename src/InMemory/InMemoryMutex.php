@@ -3,12 +3,12 @@
 /**
  * PHP Mutex implementation.
  *
- * @author  Maksim Masiukevich <dev@async-php.com>
+ * @author  Maksim Masiukevich <contacts@desperado.dev>
  * @license MIT
  * @license https://opensource.org/licenses/MIT
  */
 
-declare(strict_types = 1);
+declare(strict_types = 0);
 
 namespace ServiceBus\Mutex\InMemory;
 
@@ -29,7 +29,9 @@ final class InMemoryMutex implements Mutex
 {
     private const LATENCY_TIMEOUT = 10;
 
-    /**  @var string */
+    /**
+     * @var string
+     */
     private $id;
 
     public function __construct(string $id)
@@ -42,9 +44,6 @@ final class InMemoryMutex implements Mutex
         InMemoryMutexStorage::instance()->unlock($this->id);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function acquire(): Promise
     {
         return call(

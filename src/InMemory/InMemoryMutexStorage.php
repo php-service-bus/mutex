@@ -3,12 +3,12 @@
 /**
  * PHP Mutex implementation.
  *
- * @author  Maksim Masiukevich <dev@async-php.com>
+ * @author  Maksim Masiukevich <contacts@desperado.dev>
  * @license MIT
  * @license https://opensource.org/licenses/MIT
  */
 
-declare(strict_types = 1);
+declare(strict_types = 0);
 
 namespace ServiceBus\Mutex\InMemory;
 
@@ -22,12 +22,11 @@ final class InMemoryMutexStorage
      */
     private $localStorage = [];
 
-    /** @var self|null  */
+    /**
+     * @var self|null
+     */
     private static $instance;
 
-    /**
-     * @return self
-     */
     public static function instance(): self
     {
         if (self::$instance === null)
@@ -53,9 +52,6 @@ final class InMemoryMutexStorage
         unset($this->localStorage[$key]);
     }
 
-    /**
-     * Reset instance.
-     */
     public function reset(): void
     {
         self::$instance = null;

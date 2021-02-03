@@ -3,12 +3,12 @@
 /**
  * PHP Mutex implementation.
  *
- * @author  Maksim Masiukevich <dev@async-php.com>
+ * @author  Maksim Masiukevich <contacts@desperado.dev>
  * @license MIT
  * @license https://opensource.org/licenses/MIT
  */
 
-declare(strict_types = 1);
+declare(strict_types = 0);
 
 namespace ServiceBus\Mutex\Redis;
 
@@ -21,7 +21,9 @@ use ServiceBus\Mutex\MutexFactory;
  */
 final class RedisMutexFactory implements MutexFactory
 {
-    /** @var Redis */
+    /**
+     * @var Redis
+     */
     private $client;
 
     public function __construct(Redis $client)
@@ -29,9 +31,6 @@ final class RedisMutexFactory implements MutexFactory
         $this->client = $client;
     }
 
-    /**
-     * @inheritDoc
-     */
     public function create(string $id): Mutex
     {
         return new RedisMutex($this->client, $id);
