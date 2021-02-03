@@ -1,5 +1,2 @@
 parameters:
-	ignoreErrors:
-		-
-			message: '#Unable to resolve the template type#'
-			path: %currentWorkingDirectory%/src
+
