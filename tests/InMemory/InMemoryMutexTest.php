@@ -1,4 +1,4 @@
-<?php
+<?php /** @noinspection PhpUnhandledExceptionInspection */
 
 /**
  * PHP Mutex implementation.
@@ -23,9 +23,6 @@ use ServiceBus\Mutex\Lock;
  */
 final class InMemoryMutexTest extends TestCase
 {
-    /**
-     * {@inheritdoc}
-     */
     protected function tearDown(): void
     {
         parent::tearDown();
@@ -33,7 +30,9 @@ final class InMemoryMutexTest extends TestCase
         InMemoryMutexStorage::instance()->reset();
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function acquire(): void
     {
         Loop::run(
@@ -42,17 +41,17 @@ final class InMemoryMutexTest extends TestCase
                 $mutex   = new InMemoryMutex(__CLASS__);
                 $promise = $mutex->acquire();
 
-                static::assertTrue(InMemoryMutexStorage::instance()->has(__CLASS__));
+                self::assertTrue(InMemoryMutexStorage::instance()->has(__CLASS__));
 
                 /** @var Lock $lock */
                 $lock = yield $promise;
 
                 yield $lock->release();
 
-                static::assertFalse(InMemoryMutexStorage::instance()->has(__CLASS__));
+                self::assertFalse(InMemoryMutexStorage::instance()->has(__CLASS__));
 
-                static::assertSame(__CLASS__, $lock->id());
-                static::assertTrue($lock->released());
+                self::assertSame(__CLASS__, $lock->id());
+                self::assertTrue($lock->released());
 
                 Loop::stop();
             }

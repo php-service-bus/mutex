@@ -1,4 +1,4 @@
-<?php
+<?php /** @noinspection PhpUnhandledExceptionInspection */
 
 /**
  * PHP Mutex implementation.
@@ -18,21 +18,18 @@ use Amp\Redis\Redis;
 use Amp\Redis\RemoteExecutor;
 use PHPUnit\Framework\TestCase;
 use ServiceBus\Mutex\Lock;
-use ServiceBus\Mutex\Redis\RedisMutex;
 use ServiceBus\Mutex\Redis\RedisMutexFactory;
-use function Amp\delay;
 
 /**
  *
  */
 final class RedisMutexTest extends TestCase
 {
-    /** @var Redis */
+    /**
+     * @var Redis
+     */
     private $client;
 
-    /**
-     * @inheritDoc
-     */
     protected function setUp(): void
     {
         parent::setUp();
@@ -44,9 +41,6 @@ final class RedisMutexTest extends TestCase
         );
     }
 
-    /**
-     * @inheritDoc
-     */
     protected function tearDown(): void
     {
         parent::tearDown();
@@ -54,7 +48,9 @@ final class RedisMutexTest extends TestCase
         unset($this->client);
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function acquire(): void
     {
         Loop::run(
@@ -68,17 +64,17 @@ final class RedisMutexTest extends TestCase
                 /** @var bool $has */
                 $has = yield $this->client->has(__CLASS__);
 
-                static::assertTrue($has);
+                self::assertTrue($has);
 
                 yield $lock->release();
 
                 /** @var bool $has */
                 $has = yield $this->client->has(__CLASS__);
 
-                static::assertFalse($has);
+                self::assertFalse($has);
 
-                static::assertSame(__CLASS__, $lock->id());
-                static::assertTrue($lock->released());
+                self::assertSame(__CLASS__, $lock->id());
+                self::assertTrue($lock->released());
 
                 Loop::stop();
             }

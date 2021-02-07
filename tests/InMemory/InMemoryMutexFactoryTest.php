@@ -1,4 +1,4 @@
-<?php
+<?php /** @noinspection PhpUnhandledExceptionInspection */
 
 /**
  * PHP Mutex implementation.
@@ -26,6 +26,6 @@ final class InMemoryMutexFactoryTest extends TestCase
     {
         $mutex = (new InMemoryMutexFactory())->create(__CLASS__);
 
-        static::assertInstanceOf(InMemoryMutex::class, $mutex);
+        self::assertInstanceOf(InMemoryMutex::class, $mutex);
     }
 }
