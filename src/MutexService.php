@@ -8,17 +8,21 @@
  * @license https://opensource.org/licenses/MIT
  */
 
-declare(strict_types = 0);
+declare(strict_types=0);
 
 namespace ServiceBus\Mutex;
+
+use Amp\Promise;
 
 /**
  *
  */
-interface MutexFactory
+interface MutexService
 {
     /**
-     * Create lock for specified operation.
+     * @param callable():Promise $code
+     *
+     * @return Promise<void>
      */
-    public function create(string $id): Mutex;
+    public function withLock(string $id, callable $code): Promise;
 }

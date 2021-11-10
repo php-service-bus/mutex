@@ -1,4 +1,6 @@
-<?php /** @noinspection PhpUnhandledExceptionInspection */
+<?php
+
+/** @noinspection PhpUnhandledExceptionInspection */
 
 /**
  * PHP Mutex implementation.
@@ -8,22 +10,20 @@
  * @license https://opensource.org/licenses/MIT
  */
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace ServiceBus\Mutex\Tests\Redis;
 
 use Amp\Loop;
+use Amp\Promise;
 use Amp\Redis\Config;
 use Amp\Redis\Redis;
 use Amp\Redis\RemoteExecutor;
 use PHPUnit\Framework\TestCase;
-use ServiceBus\Mutex\Lock;
-use ServiceBus\Mutex\Redis\RedisMutexFactory;
+use ServiceBus\Mutex\Redis\RedisMutexService;
+use function Amp\call;
 
-/**
- *
- */
-final class RedisMutexTest extends TestCase
+final class RedisMutexServiceTest extends TestCase
 {
     /**
      * @var Redis
@@ -56,25 +56,23 @@ final class RedisMutexTest extends TestCase
         Loop::run(
             function (): \Generator
             {
-                $mutex = (new RedisMutexFactory($this->client))->create(__CLASS__);
+                $id           = \sha1(uniqid("test", true));
+                $mutexService = new RedisMutexService($this->client);
 
-                /** @var Lock $lock */
-                $lock = yield $mutex->acquire();
+                yield $mutexService->withLock(
+                    $id,
+                    function () use ($id): Promise
+                    {
+                        return call(
+                            function () use ($id): \Generator
+                            {
+                                self::assertTrue(yield $this->client->has($id));
+                            }
+                        );
+                    }
+                );
 
-                /** @var bool $has */
-                $has = yield $this->client->has(__CLASS__);
-
-                self::assertTrue($has);
-
-                yield $lock->release();
-
-                /** @var bool $has */
-                $has = yield $this->client->has(__CLASS__);
-
-                self::assertFalse($has);
-
-                self::assertSame(__CLASS__, $lock->id());
-                self::assertTrue($lock->released());
+                self::assertFalse(yield $this->client->has($id));
 
                 Loop::stop();
             }
