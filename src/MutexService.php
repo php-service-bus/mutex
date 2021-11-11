@@ -20,9 +20,11 @@ use Amp\Promise;
 interface MutexService
 {
     /**
-     * @param callable():Promise $code
+     * @template T as Promise|\Generator|mixed
      *
-     * @return Promise<void>
+     * @param callable(): T $code
+     *
+     * @return Promise<mixed>
      */
     public function withLock(string $id, callable $code): Promise;
 }

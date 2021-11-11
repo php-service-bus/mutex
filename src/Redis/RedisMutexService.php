@@ -54,7 +54,7 @@ final class RedisMutexService implements MutexService
                     }
 
                     yield $this->client->set($id, 'lock', $this->lockOptions);
-                    yield $code();
+                    yield call($code);
                 }
                 finally
                 {

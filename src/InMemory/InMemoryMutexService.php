@@ -38,7 +38,7 @@ final class InMemoryMutexService implements MutexService
 
                     InMemoryMutexStorage::instance()->lock($id);
 
-                    yield $code();
+                    yield call($code);
                 }
                 finally
                 {

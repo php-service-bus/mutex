@@ -61,14 +61,9 @@ final class RedisMutexServiceTest extends TestCase
 
                 yield $mutexService->withLock(
                     $id,
-                    function () use ($id): Promise
+                    function () use ($id): \Generator
                     {
-                        return call(
-                            function () use ($id): \Generator
-                            {
-                                self::assertTrue(yield $this->client->has($id));
-                            }
-                        );
+                        self::assertTrue(yield $this->client->has($id));
                     }
                 );
 

@@ -43,11 +43,9 @@ final class InMemoryMutexServiceTest extends TestCase
 
                 yield $mutexService->withLock(
                     $id,
-                    static function () use ($id): Promise
+                    static function () use ($id): void
                     {
                         self::assertTrue(InMemoryMutexStorage::instance()->has($id));
-
-                        return new Success();
                     }
                 );
 
