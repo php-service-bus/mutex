@@ -14,15 +14,13 @@ namespace ServiceBus\Mutex;
 
 use Amp\Promise;
 
-/**
- *
- */
 interface MutexService
 {
     /**
      * @template T as Promise|\Generator|mixed
      *
-     * @param callable(): T $code
+     * @psalm-param non-empty-string $id
+     * @psalm-param callable(): T $code
      *
      * @return Promise<mixed>
      */

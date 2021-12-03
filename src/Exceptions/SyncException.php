@@ -12,9 +12,6 @@ declare(strict_types=0);
 
 namespace ServiceBus\Mutex\Exceptions;
 
-/**
- *
- */
 final class SyncException extends \RuntimeException
 {
     public static function fromThrowable(\Throwable $throwable): self
