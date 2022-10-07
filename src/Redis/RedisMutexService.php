@@ -38,7 +38,7 @@ final class RedisMutexService implements MutexService
     public function __construct(Redis $client, int $lockLifetime = self::DEFAULT_LOCK_LIFETIME)
     {
         $this->client      = $client;
-        $this->lockOptions = (new SetOptions())->withTtl($lockLifetime);
+        $this->lockOptions = (new SetOptions())->withTtl($lockLifetime)->withoutOverwrite();
     }
 
     public function withLock(string $id, callable $code): Promise
@@ -48,12 +48,11 @@ final class RedisMutexService implements MutexService
             {
                 try
                 {
-                    while (yield $this->client->has($id))
+                    while (!yield $this->client->set($id, 'lock', $this->lockOptions))
                     {
                         yield delay(self::LATENCY_TIMEOUT);
                     }
 
-                    yield $this->client->set($id, 'lock', $this->lockOptions);
                     yield call($code);
                 }
                 finally
