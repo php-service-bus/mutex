@@ -38,6 +38,7 @@ final class InMemoryMutexService implements MutexService
 
                     InMemoryMutexStorage::instance()->lock($id);
 
+                    /** @psalm-suppress PossiblyInvalidArgument */
                     yield call($code);
                 }
                 finally

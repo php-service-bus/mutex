@@ -53,6 +53,10 @@ final class RedisMutexService implements MutexService
                         yield delay(self::LATENCY_TIMEOUT);
                     }
 
+                    /**
+                     * @psalm-suppress PossiblyInvalidArgument
+                     * @phpstan-ignore generator.valueType
+                     */
                     yield call($code);
                 }
                 finally

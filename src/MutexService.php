@@ -17,12 +17,10 @@ use Amp\Promise;
 interface MutexService
 {
     /**
-     * @template T as Promise|\Generator|mixed
-     *
      * @psalm-param non-empty-string $id
-     * @psalm-param callable(): T $code
+     * @psalm-param callable(): mixed $code
      *
-     * @return Promise<mixed>
+     * @return Promise<mixed|void>
      */
     public function withLock(string $id, callable $code): Promise;
 }
