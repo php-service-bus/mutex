@@ -16,6 +16,7 @@ use Amp\Promise;
 use Amp\Redis\Redis;
 use Amp\Redis\SetOptions;
 use ServiceBus\Mutex\MutexService;
+
 use function Amp\call;
 use function Amp\delay;
 
@@ -44,12 +45,9 @@ final class RedisMutexService implements MutexService
     public function withLock(string $id, callable $code): Promise
     {
         return call(
-            function () use ($id, $code): \Generator
-            {
-                try
-                {
-                    while (!yield $this->client->set($id, 'lock', $this->lockOptions))
-                    {
+            function () use ($id, $code): \Generator {
+                try {
+                    while (!yield $this->client->set($id, 'lock', $this->lockOptions)) {
                         yield delay(self::LATENCY_TIMEOUT);
                     }
 
@@ -58,9 +56,7 @@ final class RedisMutexService implements MutexService
                      * @phpstan-ignore generator.valueType
                      */
                     yield call($code);
-                }
-                finally
-                {
+                } finally {
                     yield $this->client->delete($id);
                 }
             }

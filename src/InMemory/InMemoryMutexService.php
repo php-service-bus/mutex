@@ -14,6 +14,7 @@ namespace ServiceBus\Mutex\InMemory;
 
 use Amp\Promise;
 use ServiceBus\Mutex\MutexService;
+
 use function Amp\call;
 use function Amp\delay;
 
@@ -27,12 +28,9 @@ final class InMemoryMutexService implements MutexService
     public function withLock(string $id, callable $code): Promise
     {
         return call(
-            static function () use ($id, $code): \Generator
-            {
-                try
-                {
-                    while (InMemoryMutexStorage::instance()->has($id))
-                    {
+            static function () use ($id, $code): \Generator {
+                try {
+                    while (InMemoryMutexStorage::instance()->has($id)) {
                         yield delay(self::LATENCY_TIMEOUT);
                     }
 
@@ -40,9 +38,7 @@ final class InMemoryMutexService implements MutexService
 
                     /** @psalm-suppress PossiblyInvalidArgument */
                     yield call($code);
-                }
-                finally
-                {
+                } finally {
                     InMemoryMutexStorage::instance()->unlock($id);
                 }
             }

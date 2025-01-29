@@ -36,15 +36,13 @@ final class InMemoryMutexServiceTest extends TestCase
     public function acquire(): void
     {
         Loop::run(
-            static function (): \Generator
-            {
+            static function (): \Generator {
                 $id           = \sha1(uniqid("test", true));
                 $mutexService = new InMemoryMutexService();
 
                 yield $mutexService->withLock(
                     $id,
-                    static function () use ($id): void
-                    {
+                    static function () use ($id): void {
                         self::assertTrue(InMemoryMutexStorage::instance()->has($id));
                     }
                 );

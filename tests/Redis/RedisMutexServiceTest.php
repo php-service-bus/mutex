@@ -21,6 +21,7 @@ use Amp\Redis\Redis;
 use Amp\Redis\RemoteExecutor;
 use PHPUnit\Framework\TestCase;
 use ServiceBus\Mutex\Redis\RedisMutexService;
+
 use function Amp\call;
 
 final class RedisMutexServiceTest extends TestCase
@@ -54,15 +55,13 @@ final class RedisMutexServiceTest extends TestCase
     public function acquire(): void
     {
         Loop::run(
-            function (): \Generator
-            {
+            function (): \Generator {
                 $id           = \sha1(uniqid("test", true));
                 $mutexService = new RedisMutexService($this->client);
 
                 yield $mutexService->withLock(
                     $id,
-                    function () use ($id): \Generator
-                    {
+                    function () use ($id): \Generator {
                         self::assertTrue(yield $this->client->has($id));
                     }
                 );
