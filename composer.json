@@ -33,7 +33,7 @@
     "amphp/redis": "v1.1.*"
   },
   "require-dev": {
-    "php-service-bus/code-style-config": "v5.2.x-dev",
+    "php-service-bus/code-style-config": "v5.2",
     "phpunit/phpunit": "^10.0 || ^11.0",
     "vimeo/psalm": "^4.30 || ^5.4",
     "phpstan/phpstan": "^1.12 || ^2.0"
